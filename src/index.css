@@ -1,0 +1,47 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popUp {
+  padding: 10px;
+  min-width: 150px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+.memberCard {
+  list-style: none;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+.chat {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 10px;
+}
+.msgme {
+  padding: 10px;
+  display: flex;
+  background-color: rgb(222, 235, 203);
+  justify-content: flex-end;
+  border-radius: 6px;
+}
+.msgthem {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: antiquewhite;
+}
