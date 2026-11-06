@@ -45,3 +45,23 @@
   border-radius: 6px;
   background-color: antiquewhite;
 }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.navigationList {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  list-style: none;
+}
+.navigationList a {
+  text-decoration: none;
+}
+.active {
+  color: rgb(124, 24, 217);
+  font-weight: bold;
+}

@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import type { User } from "../types";
 
 function MemberProfile({ user, onClose }: { user: User, onClose: () => void }) {
@@ -9,8 +9,8 @@ function MemberProfile({ user, onClose }: { user: User, onClose: () => void }) {
                 <p>age: {user.age}</p>
                 <p>positions: {user.category}</p>
                 <p>status: {user.online ? "online" : "offline"}</p>
-                <Link to={`/profile/${user.id}`}>read more...</Link>
-                <Link to={`/chat/${user.id}`}>Send message</Link>
+                <NavLink to={`/profile/${user.id}`}>read more...</NavLink>
+                <NavLink to={`/chat/${user.id}`}>Send message</NavLink>
                 <button onClick={onClose}>Close</button>
             </div>
         </div>
