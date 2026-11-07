@@ -3,6 +3,7 @@ import MembersPage from "./pages/MembersPage";
 import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
 import { Header } from "./components/Header";
+import { ChatsPage } from "./pages/ChatsPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<MembersPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/chat/:id" element={<ChatPage />} />
+          <Route path="/chats" element={<ChatsPage />} />
         </Routes>
       </main>
 

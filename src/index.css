@@ -62,6 +62,6 @@
   text-decoration: none;
 }
 .active {
-  color: rgb(124, 24, 217);
+  color: rgba(68, 4, 128, 0.479);
   font-weight: bold;
 }
