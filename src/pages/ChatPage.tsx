@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import { users } from "../data/users";
 import { useChatStore } from "../store/chatStore";
 
-const answers = ["Hello", "Everything is file,thanks !", "I'm good. How about you ?", "probably", "what?", "Oh...is alright", "How are you filing today?"];
+const answers = ["Hello", "Everything is fine,thanks !", "I'm good. How about you ?", "probably", "what?", "Oh...is alright", "How are you file today?"];
 
 function ChatPage() {
+    const bottomRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const { id } = useParams();
     const userId = Number(id);
     const messages = useChatStore((state) => state.messages);
@@ -14,7 +16,12 @@ function ChatPage() {
     const conversation = messages.filter(message => message.userId === userId);
     const lastMessage = conversation.at(-1);
     const user = users.find(user => user.id === userId);
-
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [lastMessage?.id]);
     useEffect(() => {
         const timer = setTimeout(() => {
             if (lastMessage?.from === "me") {
@@ -40,14 +47,16 @@ function ChatPage() {
                 <ul className="chat">
                     {conversation.map((message) =>
                         <li className={message.from === "me" ? "msgme" : "msgthem"} key={message.id}>{message.text}</li>
+
                     )}
+                    <div ref={bottomRef}></div>
                 </ul>
             </div>
             <form className="conversationForm" onSubmit={(e) => {
                 e.preventDefault();
                 if (!messageInput.trim()) return; addMessage({ id: crypto.randomUUID(), userId: userId, from: "me", text: messageInput.trim() }); setMessageInput("")
             }}>
-                <input value={messageInput} onChange={(e) => setMessageInput(e.target.value)} />
+                <input ref={inputRef} value={messageInput} onChange={(e) => setMessageInput(e.target.value)} />
                 <button type="submit">✉️</button>
             </form>
 
