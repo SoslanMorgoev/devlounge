@@ -1,7 +1,7 @@
 :root {
   --bg: #313338e4;
-  --accent: #5865f29f;
-  --text: #f2f3f5;
+  --accent: #5865f288;
+  --text: #f2f3f5e6;
   --cart: #2b2d31;
   --me: #9af0312c;
   --them: #edd14520;
@@ -91,6 +91,9 @@ body {
   justify-content: space-between;
   padding: 10px;
 }
+.header h1 {
+  color: var(--text);
+}
 .navigationList {
   display: flex;
   align-items: center;
@@ -130,13 +133,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 5px;
 }
 .conversationForm input {
   flex: 1;
 }
 .conversationForm button {
-  flex: 0.1;
+  font-size: 1.2rem;
 }
 
 main {
@@ -159,8 +162,8 @@ main {
 }
 .chatsList li {
   background-color: var(--text);
-  padding: 5px 10px;
-  border-radius: 8px;
+  padding: 0px 10px;
+  border-radius: 15px;
 }
 .chatsList a {
   display: flex;
@@ -197,4 +200,18 @@ main {
   font-family: Arial, Helvetica, sans-serif;
   background-color: var(--accent);
   flex-shrink: 0;
+}
+.title {
+  font-size: 2rem;
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.4rem;
+  }
+  .header {
+    flex-direction: column;
+  }
+  .filters {
+    flex-wrap: wrap;
+  }
 }

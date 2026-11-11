@@ -17,7 +17,6 @@ function MembersFilter() {
         <div className="filters">
 
             <input ref={inputRef} value={search} onChange={(e) => setSearch(e.target.value)} />
-
             <select value={category} onChange={(e) => setCategory(e.target.value as CategoryFilter)}>
                 <option value={"all"}>All</option>
                 <option value={"frontend"}>Frontend</option>
