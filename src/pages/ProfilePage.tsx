@@ -11,8 +11,8 @@ function ProfilePage() {
         </div>
     }
     return (
-        <div>
-            <ul className="profile chat">
+        <div >
+            <ul className="profile">
                 <li>Name: {user.name}</li>
                 <li>Age: {user.age}</li>
                 <li>Position: {user.category}</li>

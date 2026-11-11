@@ -1,8 +1,10 @@
 :root {
-  --bg: #313338;
+  --bg: #313338e4;
   --accent: #5865f2;
   --text: #f2f3f5;
   --cart: #2b2d31;
+  --me: #3141f02c;
+  --them: #8e45ed20;
 }
 body {
   background: var(--bg);
@@ -38,21 +40,28 @@ body {
 .profile {
   display: flex;
   flex-direction: column;
+  color: var(--text);
 }
+
 .chat {
   display: flex;
   flex-direction: column;
   list-style: none;
   color: var(--text);
   padding: 2px;
+  gap: 2px;
 }
 .msgme {
-  padding: 10px;
-  display: flex;
-  justify-content: flex-end;
+  padding: 7px 15px;
+  border-radius: 10px;
+  margin-left: auto;
+  background-color: var(--me);
 }
 .msgthem {
-  padding: 10px;
+  border-radius: 10px;
+  padding: 7px 15px;
+  margin-right: auto;
+  background-color: var(--them);
 }
 .header {
   display: flex;
@@ -78,4 +87,29 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.conversationHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.conversationMain {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  overflow-y: auto;
+}
+.conversationForm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.conversationForm input {
+  min-width: 92%;
 }
