@@ -11,15 +11,15 @@ function ProfilePage() {
         </div>
     }
     return (
-        <div >
-            <ul className="profile">
+        <div className="profile">
+            <ul className="profileInfo">
                 <li>Name: {user.name}</li>
                 <li>Age: {user.age}</li>
                 <li>Position: {user.category}</li>
                 <li>Status: {user.online ? "online" : "offline"}</li>
-                <li><Link to={`/chat/${user.id}`}>Send message</Link></li>
+                <button><Link to={`/chat/${user.id}`}>Send message</Link></button>
             </ul>
-            <Link to={"/"}>Back</Link>
+            <button ><Link to={"/"}>Back</Link></button>
         </div>
     )
 }

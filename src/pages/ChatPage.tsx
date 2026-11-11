@@ -38,7 +38,7 @@ function ChatPage() {
             <div className="conversationHead">
                 <Link to={"/"}>⬅️</Link>
                 <span>
-                    <p>{user.name}: {user.online ? "online 🟢" : "offline 🔴"}</p>
+                    <p><Link to={`/profile/${userId}`}>{user.name}</Link>: {user.online ? "online 🟢" : "offline 🔴"}</p>
                 </span>
 
 
