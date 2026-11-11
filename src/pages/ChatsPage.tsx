@@ -9,12 +9,12 @@ export function ChatsPage() {
 
     const chatUsers = users.filter(user => chatIds.includes(user.id));
 
-    console.log("chto tam za chat", chatUsers);
+
     return (
         <div>
             <h2>Chats</h2>
             {!chatUsers.length && <p>No chats yet</p>}
-            <ul>
+            <ul >
                 {chatUsers.map(user => {
                     const lastMessage = messages.filter(m => m.userId === user.id).at(-1);
                     return (

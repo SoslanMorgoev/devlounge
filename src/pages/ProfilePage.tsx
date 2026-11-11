@@ -12,7 +12,7 @@ function ProfilePage() {
     }
     return (
         <div>
-            <ul className="profile">
+            <ul className="profile chat">
                 <li>Name: {user.name}</li>
                 <li>Age: {user.age}</li>
                 <li>Position: {user.category}</li>

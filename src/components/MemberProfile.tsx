@@ -4,7 +4,7 @@ import type { User } from "../types";
 function MemberProfile({ user, onClose }: { user: User, onClose: () => void }) {
     return (
         <div className="overlay">
-            <div className="popUp">
+            <div className="popUp ">
                 <h3>name: {user.name}</h3>
                 <p>age: {user.age}</p>
                 <p>positions: {user.category}</p>

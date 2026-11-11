@@ -5,7 +5,7 @@ import MemberProfile from "./MemberProfile";
 function MembersList({ members, selectedUser, onSelect }: { members: User[], selectedUser: SelectedUser, onSelect: (user: SelectedUser) => void }) {
     return (
         <>
-            <ul className="membersList" id="membersList">{members.map(user => (
+            <ul className="membersList" >{members.map(user => (
                 <MemberCard key={user.id} user={user} onSelect={onSelect} />
             ))}</ul>
             {!members.length && <p>User not found!</p>}

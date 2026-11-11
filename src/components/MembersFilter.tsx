@@ -9,17 +9,21 @@ function MembersFilter() {
     const onlineOnly = useFilterStore((state) => state.onlineOnly);
     const setOnlineOnly = useFilterStore((state) => state.setOnlineOnly);
     return (
-        <>
+        <div className="filters">
+
             <input value={search} onChange={(e) => setSearch(e.target.value)} />
-            <input type="checkbox" checked={onlineOnly} onChange={(e) => setOnlineOnly(e.target.checked)} />
+
             <select value={category} onChange={(e) => setCategory(e.target.value as CategoryFilter)}>
                 <option value={"all"}>All</option>
                 <option value={"frontend"}>Frontend</option>
                 <option value={"backend"}>Backend</option>
                 <option value={"fullstack"}>Fullstack</option>
             </select>
+            <label>
+                <input type="checkbox" checked={onlineOnly} onChange={(e) => setOnlineOnly(e.target.checked)} />Online
+            </label>
             <button onClick={() => { setCategory("all"); setSearch(""); setOnlineOnly(false) }}>Reset</button>
-        </>
+        </div>
     )
 }
 export default MembersFilter;

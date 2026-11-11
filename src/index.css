@@ -1,7 +1,16 @@
+:root {
+  --bg: #313338;
+  --accent: #5865f2;
+  --text: #f2f3f5;
+  --cart: #2b2d31;
+}
+body {
+  background: var(--bg);
+}
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--bg);
   backdrop-filter: blur(4px);
   z-index: 1;
   display: flex;
@@ -17,11 +26,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--text);
   border-radius: 8px;
 }
-.memberCard {
+.membersList {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
 }
 .profile {
   display: flex;
@@ -31,19 +43,16 @@
   display: flex;
   flex-direction: column;
   list-style: none;
-  padding: 10px;
+  color: var(--text);
+  padding: 2px;
 }
 .msgme {
   padding: 10px;
   display: flex;
-  background-color: rgb(222, 235, 203);
   justify-content: flex-end;
-  border-radius: 6px;
 }
 .msgthem {
   padding: 10px;
-  border-radius: 6px;
-  background-color: antiquewhite;
 }
 .header {
   display: flex;
@@ -62,6 +71,11 @@
   text-decoration: none;
 }
 .active {
-  color: rgba(68, 4, 128, 0.479);
+  color: var(--accent);
   font-weight: bold;
+}
+.filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }

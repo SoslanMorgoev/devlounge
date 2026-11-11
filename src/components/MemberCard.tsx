@@ -3,11 +3,11 @@ import type { User } from "../types";
 function MemberCard({ user, onSelect }: { user: User, onSelect: (user: User) => void }) {
     return (
         <>
-            <ul className="MemberCard" id="membersCard" >
-                <li>{user.name}</li>
-                <li>{user.online ? "online" : "offline"}</li>
+            <li className="memberCard chat" >
+                <p>{user.name}</p>
+                <p>{user.online ? "online" : "offline"}</p>
                 <button onClick={() => onSelect(user)}>Show details</button>
-            </ul>
+            </li>
         </>
     )
 }
