@@ -4,6 +4,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ChatPage from "./pages/ChatPage";
 import { Header } from "./components/Header";
 import { ChatsPage } from "./pages/ChatsPage";
+import { SettingsPage } from "./pages/SettingsPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/chat/:id" element={<ChatPage />} />
           <Route path="/chats" element={<ChatsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </main>
 

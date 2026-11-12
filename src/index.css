@@ -6,6 +6,7 @@
   --me: #9af0312c;
   --them: #edd14520;
   --chatsList: #959be0;
+  --issue: #f60a0ad6;
 }
 body {
   background: var(--bg);
@@ -204,6 +205,24 @@ main {
 .title {
   font-size: 2rem;
 }
+.profileForm {
+  display: flex;
+  flex-direction: column;
+}
+.draftForProfile {
+  display: flex;
+  justify-content: space-around;
+}
+.draftForProfile label {
+  padding: auto;
+}
+.profileInformation {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.red {
+  color: var(--issue);
+}
+
 @media (max-width: 600px) {
   .title {
     font-size: 1.4rem;

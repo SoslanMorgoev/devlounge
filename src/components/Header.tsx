@@ -10,7 +10,7 @@ export function Header() {
                         <li><NavLink to="/">Users</NavLink></li>
                         <li><NavLink to="/chats">Chats</NavLink></li>
                         <li><NavLink to="/">News</NavLink></li>
-                        <li><NavLink to="/">Settings</NavLink></li>
+                        <li><NavLink to="/settings">Settings</NavLink></li>
 
                     </ul>
                 </nav>
