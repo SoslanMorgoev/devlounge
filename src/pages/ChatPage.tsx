@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router";
 import { users } from "../data/users";
 import { useChatStore } from "../store/chatStore";
 
-const answers = ["Hello", "Everything is fine,thanks !", "I'm good. How about you ?", "probably", "what?", "Oh...is alright", "How are you file today?"];
+const answers = ["Hello", "Everything is good,thanks !", "I'm good. What about you ?", "probably...", "What?", "Oh...it's all right", "How do you feel today?", "No", "Yes", "Ok"];
 
 function ChatPage() {
     const bottomRef = useRef<HTMLDivElement>(null);

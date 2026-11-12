@@ -12,21 +12,24 @@ export type Profile = {
 type ProfileStore = {
   profile: Profile;
   addToProfile: (newProfile: Profile) => void;
+  editProfile: (profile: Profile) => void;
 };
 
 export const useProfileStore = create<ProfileStore>()(
   persist(
     (set) => ({
       profile: {
-        id: "",
-        name: "",
+        id: "134kkdmgtks,,1pgg15",
+        name: "Samson",
         category: "frontend",
-        email: "",
-        status: "",
+        email: "SamsonS@mail.com",
+        status: "Creating this project",
       },
       addToProfile: (newProfile: Profile) =>
         set(() => ({ profile: newProfile })),
+      editProfile: (profile: Profile) => set(() => ({ profile: profile })),
     }),
+
     { name: "profileStore" },
   ),
 );

@@ -124,6 +124,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.conversationHead a {
+  text-decoration: none;
+}
 .conversationMain {
   display: flex;
   flex-direction: column;
@@ -222,7 +225,29 @@ main {
 .red {
   color: var(--issue);
 }
-
+.settingNavigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin-left: auto;
+  padding: 3px 8px;
+}
+.settingNavigation a {
+  text-decoration: none;
+  background-color: var(--text);
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+.settingNavigation a:hover {
+  transform: scale(1.1);
+}
+.accountDraft {
+  background-color: var(--them);
+  padding: 10px;
+  border-radius: 15px;
+}
 @media (max-width: 600px) {
   .title {
     font-size: 1.4rem;
