@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 export type Profile = {
   id: string;
   name: string;
+  email: string;
   category: Category;
   status: string;
 };
@@ -16,7 +17,13 @@ type ProfileStore = {
 export const useProfileStore = create<ProfileStore>()(
   persist(
     (set) => ({
-      profile: { id: "", name: "", category: "frontend", status: "" },
+      profile: {
+        id: "",
+        name: "",
+        category: "frontend",
+        email: "",
+        status: "",
+      },
       addToProfile: (newProfile: Profile) =>
         set(() => ({ profile: newProfile })),
     }),

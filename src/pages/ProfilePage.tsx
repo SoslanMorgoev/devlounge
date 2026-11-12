@@ -17,6 +17,7 @@ function ProfilePage() {
                 <li>Age: {user.age}</li>
                 <li>Position: {user.category}</li>
                 <li>Status: {user.online ? "online" : "offline"}</li>
+                <li>Email: {user.email}</li>
                 <button><Link to={`/chat/${user.id}`}>Send message</Link></button>
             </ul>
             <button ><Link to={"/"}>Back</Link></button>

@@ -233,4 +233,7 @@ main {
   .filters {
     flex-wrap: wrap;
   }
+  .draftForProfile {
+    flex-wrap: wrap;
+  }
 }

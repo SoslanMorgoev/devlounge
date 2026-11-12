@@ -2,6 +2,7 @@ export type User = {
   id: number;
   name: string;
   age: number;
+  email: string;
   category: Category;
   online: boolean;
 };
