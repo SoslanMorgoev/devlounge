@@ -9,7 +9,7 @@ export function Header() {
                     <ul className="navigationList">
                         <li><NavLink to="/">Users</NavLink></li>
                         <li><NavLink to="/chats">Chats</NavLink></li>
-                        <li><NavLink to="/">News</NavLink></li>
+                        <li><NavLink to="/news">News</NavLink></li>
                         <li><NavLink to="/settings">Settings</NavLink></li>
 
                     </ul>

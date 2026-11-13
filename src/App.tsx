@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { ChatsPage } from "./pages/ChatsPage";
 import { AccountPage } from "./pages/AccountPage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { NewsPage } from "./pages/NewsPage";
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MembersPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/chat/:id" element={<ChatPage />} />
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/settings" element={<SettingsPage />} />

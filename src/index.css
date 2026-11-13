@@ -233,6 +233,15 @@ main {
   margin-left: auto;
   padding: 3px 8px;
 }
+.settingNavigation button {
+  background-color: var(--text);
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+.settingNavigation button:hover {
+  transform: scale(1.1);
+}
 .settingNavigation a {
   text-decoration: none;
   background-color: var(--text);
@@ -291,6 +300,13 @@ main {
 .deleteChatButtons {
   display: flex;
   gap: 8px;
+}
+.newsList {
+  list-style: none;
+  padding-left: 0;
+}
+.newsList a {
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {
