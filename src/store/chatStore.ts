@@ -5,6 +5,7 @@ import type { Message } from "../types";
 type ChatState = {
   messages: Message[];
   addMessage: (message: Message) => void;
+  clearAll: () => void;
 };
 
 export const useChatStore = create<ChatState>()(
@@ -13,6 +14,7 @@ export const useChatStore = create<ChatState>()(
       messages: [],
       addMessage: (message) =>
         set((state) => ({ messages: [...state.messages, message] })),
+      clearAll: () => set(() => ({ messages: [] })),
     }),
     { name: "devlounge-chat" },
   ),

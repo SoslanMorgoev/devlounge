@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import { users } from "../data/users";
 import { useChatStore } from "../store/chatStore";
+import { useSettingStore } from "../store/settingStore";
 
 const answers = ["Hello", "Everything is good,thanks !", "I'm good. What about you ?", "probably...", "What?", "Oh...it's all right", "How do you feel today?", "No", "Yes", "Ok"];
 
@@ -16,6 +17,7 @@ function ChatPage() {
     const conversation = messages.filter(message => message.userId === userId);
     const lastMessage = conversation.at(-1);
     const user = users.find(user => user.id === userId);
+    const autoReply = useSettingStore((state) => state.autoReply);
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
@@ -23,14 +25,16 @@ function ChatPage() {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [lastMessage?.id]);
     useEffect(() => {
-        const timer = setTimeout(() => {
-            if (lastMessage?.from === "me") {
-                const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
-                addMessage({ id: crypto.randomUUID(), userId: userId, from: "them", text: randomAnswer });
-            }
-        }, 2000);
-        return () => { clearTimeout(timer) };
-    }, [lastMessage?.id]);
+        if (autoReply) {
+            const timer = setTimeout(() => {
+                if (lastMessage?.from === "me") {
+                    const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+                    addMessage({ id: crypto.randomUUID(), userId: userId, from: "them", text: randomAnswer });
+                }
+            }, 2000);
+            return () => { clearTimeout(timer) };
+        }
+    }, [lastMessage?.id, autoReply]);
 
     if (!user) return `User not found!`;
     return (

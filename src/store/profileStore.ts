@@ -19,7 +19,7 @@ export const useProfileStore = create<ProfileStore>()(
   persist(
     (set) => ({
       profile: {
-        id: "134kkdmgtks,,1pgg15",
+        id: "1fdu8",
         name: "Samson",
         category: "frontend",
         email: "SamsonS@mail.com",
