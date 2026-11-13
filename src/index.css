@@ -308,6 +308,20 @@ main {
 .newsList a {
   text-decoration: none;
 }
+.newsPage {
+  display: flex;
+  flex-direction: column;
+}
+.newsNavigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+}
+.newsContainer {
+  height: 70vh;
+  overflow-y: auto;
+}
 
 @media (max-width: 600px) {
   .title {
