@@ -1,20 +1,27 @@
 :root {
-  --bg: #313338e4;
-  --accent: #5865f288;
-  --text: #f2f3f5e6;
-  --cart: #2b2d31;
-  --me: #9af0312c;
-  --them: #edd14520;
-  --chatsList: #959be0;
-  --issue: #f60a0ad6;
+  --bg: #0d0f14;
+  --surface: #151821;
+  --accent: #8b7cff;
+  --text: #e7e9ef;
+  --cart: #1d212c;
+  --me: #8b7cff40;
+  --them: #ffffff14;
+  --chatsList: #b3a9ff;
+  --issue: #ff5c72;
+  --newsBg: #1d212c;
+  --overlay: #0d0f14cc;
 }
 body {
   background: var(--bg);
+  color: var(--text);
+}
+a {
+  color: var(--chatsList);
 }
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: var(--bg);
+  background-color: var(--overlay);
   backdrop-filter: blur(4px);
   z-index: 1;
   display: flex;
@@ -29,7 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--text);
+  background-color: var(--cart);
   border-radius: 12px;
 }
 .popUp #closeButton {
@@ -50,6 +57,13 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
   padding-left: 0px;
+}
+.membersList button {
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+.membersList button:hover {
+  transform: scale(1.1);
 }
 .profileInfo {
   display: flex;
@@ -147,7 +161,7 @@ body {
 }
 
 main {
-  background-color: var(--accent);
+  background-color: var(--surface);
   padding: 10px;
   border-radius: 6px;
 }
@@ -165,7 +179,7 @@ main {
   padding-left: 0px;
 }
 .chatsList li {
-  background-color: var(--text);
+  background-color: var(--cart);
   padding: 0px 10px;
   border-radius: 15px;
 }
@@ -234,7 +248,8 @@ main {
   padding: 3px 8px;
 }
 .settingNavigation button {
-  background-color: var(--text);
+  background-color: var(--cart);
+  color: var(--text);
   padding: 5px 10px;
   border-radius: 10px;
   transition: transform 0.2s ease;
@@ -244,7 +259,8 @@ main {
 }
 .settingNavigation a {
   text-decoration: none;
-  background-color: var(--text);
+  background-color: var(--cart);
+  color: var(--text);
   padding: 5px 10px;
   border-radius: 10px;
   transition: transform 0.2s ease;
@@ -318,11 +334,89 @@ main {
   padding: 10px;
   align-items: center;
 }
+.newsNavigation h3 {
+  font-size: 1.5rem;
+}
 .newsContainer {
   height: 70vh;
   overflow-y: auto;
 }
-
+.tagTips {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 10px 10px;
+}
+.tagTip {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--cart);
+  color: var(--text);
+  cursor: pointer;
+}
+.tagTipActive {
+  background-color: var(--accent);
+}
+.tagSearchSpan {
+  display: flex;
+  gap: 10px;
+}
+.tagSearchSpan input {
+  border-radius: 20px;
+  border: none;
+  padding: 5px 10px;
+}
+.tagSearchSpan button {
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--cart);
+  color: var(--text);
+  cursor: pointer;
+}
+.article {
+  background-color: var(--newsBg);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.article a {
+  color: var(--text);
+  font-weight: bold;
+}
+.article p {
+  margin: 0;
+  opacity: 0.9;
+}
+.articleAuthor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--chatsList);
+}
+.articleAuthor img {
+  border-radius: 6px;
+  opacity: 0.8;
+}
+.articleTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.articleStatus {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--chatsList);
+  opacity: 0.8;
+}
 @media (max-width: 600px) {
   .title {
     font-size: 1.4rem;
