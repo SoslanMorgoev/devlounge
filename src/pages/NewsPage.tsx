@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
+import { useSettingStore } from "../store/settingStore";
 
 type Article = {
     id: number;
@@ -18,8 +19,9 @@ type Article = {
 
 const tipsTag = ["javascript", "google", "ruby", "webdev", "beginners", "go", "react", "typescript", "tailwind", "developer"];
 export function NewsPage() {
-    const [searchTag, setSearchTag] = useState("");
-    const [input, setInput] = useState("");
+    const newsTag = useSettingStore((state) => state.newsTag);
+    const [searchTag, setSearchTag] = useState(newsTag);
+    const [input, setInput] = useState(newsTag);
     const inputRef = useRef<HTMLInputElement>(null);
     const { data, isPending, isError, error } = useQuery<Article[]>({
         queryKey: ["news", searchTag],
