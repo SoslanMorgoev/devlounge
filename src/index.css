@@ -112,8 +112,9 @@ a {
 .navigationList {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 20px;
   padding: 5px;
+  font-size: 1.2rem;
   list-style: none;
 }
 .navigationList a {
@@ -421,6 +422,11 @@ main {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+.logInClass {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 @media (max-width: 600px) {
   .title {

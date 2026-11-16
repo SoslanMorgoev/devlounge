@@ -7,6 +7,7 @@ import { ChatsPage } from "./pages/ChatsPage";
 import { AccountPage } from "./pages/AccountPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NewsPage } from "./pages/NewsPage";
+import { LogInPage } from "./pages/LoginPage";
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/account" element={<AccountPage />} />
+          <Route path="/login" element={<LogInPage />} />
 
         </Routes>
       </main>

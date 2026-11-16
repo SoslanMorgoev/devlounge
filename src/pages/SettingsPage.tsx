@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { ChatSettingsModal } from "../components/ChatSettingsModal";
 import { useState } from "react";
 import { NewsSettingsModal } from "../components/NewsSettingsModal";
-import { ThemeSettingsModal } from "../components/ThemeSettingsModal";
+// import { ThemeSettingsModal } from "../components/ThemeSettingsModal";
 
 export function SettingsPage() {
     const [openModal, setOpenModal] = useState<"chats" | "news" | "theme" | null>(null);
@@ -18,8 +18,8 @@ export function SettingsPage() {
             {openModal === "chats" && <ChatSettingsModal onClose={handleClose} />}
             <button onClick={() => setOpenModal("news")}>News</button>
             {openModal === "news" && <NewsSettingsModal onClose={handleClose} />}
-            <button onClick={() => setOpenModal("theme")}>Theme</button>
-            {openModal === "theme" && <ThemeSettingsModal onClose={handleClose} />}
+            {/* <button onClick={() => setOpenModal("theme")}>Theme</button>
+            {openModal === "theme" && <ThemeSettingsModal onClose={handleClose} />} */}
         </div>
     )
 }
