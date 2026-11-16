@@ -17,17 +17,17 @@ export function LogInPage() {
                 setEmail("");
                 setPassword("");
             }}>
-                <label form="userName" >
+                <label >
                     Name:
-                    <input id="userName" placeholder="Enter your name" onChange={(e) => setUserName(e.target.value)} />
+                    <input value={userName} placeholder="Enter your name" onChange={(e) => setUserName(e.target.value)} />
                 </label>
-                <label form="email">
+                <label >
                     Email:
-                    <input id="email" type="email" value={email} placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" value={email} placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} />
                 </label>
-                <label form="password">
+                <label >
                     Password:
-                    <input id="password" type="password" value={password} placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" value={password} placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} />
                 </label>
 
                 <button type="submit">Submit</button>
