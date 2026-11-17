@@ -1,26 +1,37 @@
 import { Link, useParams } from "react-router";
-import { users } from "../data/users";
+import { supabase } from "../lib/supabase";
+import { useQuery } from "@tanstack/react-query";
+import type { User } from "../types";
 
 function ProfilePage() {
     const { id } = useParams();
-    const user = users.find(i => i.id === Number(id));
-    if (!user) {
-        return <div>
-            <p>User not found</p>
-            <Link to={"/"}>Back</Link>
-        </div>
-    }
+    const { data, isPending, isError } = useQuery<User>({
+        queryKey: ["profiles", id],
+        queryFn: async () => {
+            const { data, error } = await supabase.from("profiles").select("*").eq("id", id).single();
+            if (error) throw error;
+            return data;
+        }
+    });
+
+    if (isPending) return <p>Loading...</p>
+    if (isError) return (<div>
+        <p>User not found</p>
+        <Link to={"/"}>Back</Link>
+    </div>);
     return (
         <div className="profile">
             <ul className="profileInfo">
-                <li>Name: {user.name}</li>
-                <li>Age: {user.age}</li>
-                <li>Position: {user.category}</li>
-                <li>Status: {user.online ? "online" : "offline"}</li>
-                <li>Email: {user.email}</li>
-                <button><Link to={`/chat/${user.id}`}>Send message</Link></button>
+                <li>Name: {data.name}</li>
+                <li>category: {data.category}</li>
+                <li>status: {data.status}</li>
+
             </ul>
-            <button ><Link to={"/"}>Back</Link></button>
+            <div className="userProfileButtons">
+                <Link to={`/chat/${data.id}`}>Send message</Link>
+                <Link to={"/"}>Back</Link>
+            </div>
+
         </div>
     )
 }

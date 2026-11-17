@@ -433,6 +433,10 @@ main {
   flex-direction: column;
   gap: 4px;
 }
+.userProfileButtons {
+  display: flex;
+  flex-direction: column;
+}
 @media (max-width: 600px) {
   .title {
     font-size: 1.4rem;

@@ -10,7 +10,7 @@ function ChatPage() {
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const { id } = useParams();
-    const userId = Number(id);
+    const userId = id ?? "";
     const messages = useChatStore((state) => state.messages);
     const addMessage = useChatStore((state) => state.addMessage);
     const [messageInput, setMessageInput] = useState("");
@@ -42,7 +42,7 @@ function ChatPage() {
             <div className="conversationHead">
                 <Link to={"/"}>⬅️</Link>
                 <span>
-                    <p><Link to={`/profile/${userId}`}>{user.name}</Link>: {user.online ? "online 🟢" : "offline 🔴"}</p>
+                    <Link to={`/profile/${userId}`}>{user.name}</Link>
                 </span>
 
 

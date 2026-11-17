@@ -1,14 +1,13 @@
 export type User = {
-  id: number;
+  id: string;
   name: string;
-  age: number;
-  email: string;
   category: Category;
-  online: boolean;
+  status: string;
+  created_at: string;
 };
 export type Message = {
   id: string;
-  userId: number;
+  userId: string;
   from: "me" | "them";
   text: string;
 };

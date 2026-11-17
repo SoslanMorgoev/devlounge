@@ -9,9 +9,8 @@ function MemberProfile({ user, onClose }: { user: User, onClose: () => void }) {
                 <button id="closeButton" onClick={onClose}>✕</button>
                 <p className="avatar">{user.name[0].toUpperCase()}</p>
                 <h3>name: {user.name}</h3>
-                <p>age: {user.age}</p>
+                <p>status: {user.status}</p>
                 <p>positions: {user.category}</p>
-                <p> {user.online ? "🟢 online" : "🔴 offline"}</p>
                 <div className="popUpButton">
                     <button ><NavLink to={`/chat/${user.id}`}>Send message</NavLink></button>
                     <button ><NavLink to={`/profile/${user.id}`}>Open profile</NavLink></button>

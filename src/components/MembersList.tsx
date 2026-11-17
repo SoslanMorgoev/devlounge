@@ -9,7 +9,6 @@ function MembersList({ members, selectedUser, onSelect }: { members: User[], sel
                 <MemberCard key={user.id} user={user} onSelect={onSelect} />
             ))}</ul>
             {!members.length && <p>User not found!</p>}
-            <p>Online: {members.filter(user => user.online).length}</p>
             {selectedUser && <MemberProfile user={selectedUser} onClose={() => onSelect(null)} />}
         </>
     )

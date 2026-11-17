@@ -5,7 +5,7 @@ function MemberCard({ user, onSelect }: { user: User, onSelect: (user: User) => 
         <>
             <li className="memberCard chat" >
                 <p>{user.name}</p>
-                <p>{user.online ? "online" : "offline"}</p>
+                <p>{user.status}</p>
                 <button onClick={() => onSelect(user)}>Show details</button>
             </li>
         </>
