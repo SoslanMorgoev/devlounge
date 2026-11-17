@@ -1,6 +1,12 @@
 import { NavLink } from "react-router";
+import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router";
+import { supabase } from "../lib/supabase";
 
 export function Header() {
+    const navigate = useNavigate();
+    const user = useAuthStore((state) => state.user);
+
     return (
         <header className="header">
             <h1>DevLounge</h1>
@@ -14,7 +20,19 @@ export function Header() {
                     </ul>
                 </nav>
             </div>
-            <p><li><NavLink to="/Login">LogIn</NavLink></li></p>
+
+            {user ? (
+                <div className="logout">
+                    <NavLink to="/settings/account">{user.email}</NavLink>
+
+                    <button onClick={async () => {
+                        await supabase.auth.signOut();
+                        navigate("/login");
+                    }}>LogOut</button>
+                </div>
+            ) : (
+                <NavLink to="/login">LogIn</NavLink>
+            )}
         </header>
     )
 }

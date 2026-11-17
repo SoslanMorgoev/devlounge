@@ -8,10 +8,21 @@ import { AccountPage } from "./pages/AccountPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NewsPage } from "./pages/NewsPage";
 import { LogInPage } from "./pages/LoginPage";
+import { useEffect } from "react";
+import { supabase } from "./lib/supabase";
+import { useAuthStore } from "./store/authStore";
 
 
 
 function App() {
+  const setUser = useAuthStore((state) => state.setUser);
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />

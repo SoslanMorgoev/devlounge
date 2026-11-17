@@ -423,10 +423,15 @@ main {
   gap: 10px;
   margin-top: 10px;
 }
-.logInClass {
+.registration {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+.logout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 @media (max-width: 600px) {
   .title {
