@@ -23,9 +23,15 @@ export function LogInPage() {
                 <form className="registration" onSubmit={async (e) => {
                     e.preventDefault();
                     if (mode === "signup") {
-                        const { error } = await supabase.auth.signUp({ email, password });
+                        const { data, error } = await supabase.auth.signUp({ email, password });
                         if (error) {
                             setErrorMessage(error.message);
+                            return;
+                        }
+                        if (!data.user) return;
+                        const { error: profileError } = await supabase.from("profiles").insert({ id: data.user.id, name: userName.trim() });
+                        if (profileError) {
+                            setErrorMessage(profileError.message);
                             return;
                         }
                     } else {
@@ -40,7 +46,7 @@ export function LogInPage() {
                 }}>
                     {mode === "signup" && <label >
                         Name:
-                        <input value={userName} placeholder="Enter your name" onChange={(e) => setUserName(e.target.value)} />
+                        <input required value={userName} placeholder="Enter your name" onChange={(e) => setUserName(e.target.value)} />
                     </label>}
                     <label >
                         Email:
