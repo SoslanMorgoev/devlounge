@@ -1,9 +1,11 @@
 
-import { useProfileStore } from "../store/profileStore";
 import { useState } from "react";
 import { AccountDraft } from "../components/AccountDraft";
+import { useAuthStore } from "../store/authStore";
+import { useProfile } from "../hooks/useProfile";
 export function AccountPage() {
-    const profile = useProfileStore((state) => state.profile);
+    const me = useAuthStore((state) => state.user);
+    const { data: profile, isPending, isError } = useProfile(me?.id);
     const [isEditing, setIsEditing] = useState(false);
     function handleClose() {
         setIsEditing(false);
@@ -11,21 +13,21 @@ export function AccountPage() {
     function editProfile() {
         setIsEditing(true);
     }
+    if (isPending) return <p>Loading...</p>
+    if (isError) return <p>Ops,something went wrong</p>
     return (
         <article className="profileForm">
-            {profile.name.length > 0 && <div className="profileInformation">
+            <div className="profileInformation">
 
                 <ul className="accountInfo">
                     <p className="avatar">{profile.name[0].toUpperCase()}</p>
                     <li>Name: {profile.name}</li>
                     <li>Position: {profile.category}</li>
                     <li>Status: {profile.status}</li>
-                    <li>Email: {profile.email}</li>
                     <button onClick={editProfile}>Edit</button>
-                    {!profile && <p>Profile not founded</p>}
-                    {isEditing && <AccountDraft onClose={handleClose} />}
+                    {isEditing && <AccountDraft profile={profile} onClose={handleClose} />}
                 </ul>
-            </div>}
+            </div>
         </article>
 
     )
