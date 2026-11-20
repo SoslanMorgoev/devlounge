@@ -2,19 +2,11 @@ import { useState } from "react";
 import MembersList from "../components/MembersList";
 import MembersFilter from "../components/MembersFilter";
 import { useFilterStore } from "../store/filterStore";
-import type { User, SelectedUser } from "../types";
-import { supabase } from "../lib/supabase";
-import { useQuery } from "@tanstack/react-query";
+import type { SelectedUser } from "../types";
+import { useProfiles } from "../hooks/useProfiles";
 
 function MembersPage() {
-    const { data, isPending, isError } = useQuery<User[]>({
-        queryKey: ["profiles"],
-        queryFn: async () => {
-            const { data, error } = await supabase.from("profiles").select("*");
-            if (error) throw error;
-            return data;
-        },
-    });
+    const { data, isPending, isError } = useProfiles();
     const search = useFilterStore((state) => state.search);
     const category = useFilterStore((state) => state.category);
     const [selectedUser, setSelectedUser] = useState<SelectedUser>(null);

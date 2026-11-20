@@ -1,42 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
-import { users } from "../data/users";
-import { useChatStore } from "../store/chatStore";
-import { useSettingStore } from "../store/settingStore";
-
-const answers = ["Hello", "Everything is good,thanks !", "I'm good. What about you ?", "probably...", "What?", "Oh...it's all right", "How do you feel today?", "No", "Yes", "Ok"];
+import { useProfile } from "../hooks/useProfile";
+import { useAuthStore } from "../store/authStore";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { Message } from "../types";
+import { supabase } from "../lib/supabase";
 
 function ChatPage() {
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const queryClient = useQueryClient();
     const { id } = useParams();
+    const me = useAuthStore((state) => state.user);
+    const { data: messages } = useQuery<Message[]>({
+        queryKey: ["messages", id],
+        queryFn: async () => {
+            const { data, error } = await supabase.from("messages").select("*").or(`sender_id.eq.${id},receiver_id.eq.${id}`).order("created_at");
+            if (error) throw error;
+            return data;
+        }
+
+    })
     const userId = id ?? "";
-    const messages = useChatStore((state) => state.messages);
-    const addMessage = useChatStore((state) => state.addMessage);
     const [messageInput, setMessageInput] = useState("");
-    const conversation = messages.filter(message => message.userId === userId);
-    const lastMessage = conversation.at(-1);
-    const user = users.find(user => user.id === userId);
-    const autoReply = useSettingStore((state) => state.autoReply);
+    const lastMessage = messages?.at(-1);
+    const { data: user, isPending, isError } = useProfile(id);
+
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [lastMessage?.id]);
-    useEffect(() => {
-        if (autoReply) {
-            const timer = setTimeout(() => {
-                if (lastMessage?.from === "me") {
-                    const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
-                    addMessage({ id: crypto.randomUUID(), userId: userId, from: "them", text: randomAnswer });
-                }
-            }, 2000);
-            return () => { clearTimeout(timer) };
-        }
-    }, [lastMessage?.id, autoReply]);
 
-    if (!user) return `User not found!`;
+    if (isPending) return <p>Loading...</p>
+    if (isError) return <p>User not found!</p>
+
     return (
         <div className="conversation">
             <div className="conversationHead">
@@ -49,22 +48,31 @@ function ChatPage() {
             </div>
             <div className="conversationMain">
                 <ul className="chat">
-                    {conversation.map((message) =>
-                        <li className={message.from === "me" ? "msgme" : "msgthem"} key={message.id}>{message.text}</li>
+                    {messages?.map((message) =>
+                        <li className={message.sender_id === me?.id ? "msgme" : "msgthem"} key={message.id}>{message.text}</li>
 
                     )}
                     <div ref={bottomRef}></div>
                 </ul>
             </div>
-            <form className="conversationForm" onSubmit={(e) => {
+            <form className="conversationForm" onSubmit={async (e) => {
                 e.preventDefault();
-                if (!messageInput.trim()) return; addMessage({ id: crypto.randomUUID(), userId: userId, from: "me", text: messageInput.trim() }); setMessageInput("")
+                const text = messageInput.trim();
+                if (!text || !me || !id) return;
+
+                const { error } = await supabase.from("messages").insert({ sender_id: me.id, receiver_id: id, text });
+                if (error) {
+                    console.log(error.message);
+                    return;
+                }
+                setMessageInput("");
+                queryClient.invalidateQueries({ queryKey: ["messages", id] });
             }}>
                 <input ref={inputRef} value={messageInput} onChange={(e) => setMessageInput(e.target.value)} />
                 <button type="submit">✉️</button>
             </form>
 
-        </div>
+        </div >
     )
 }
 export default ChatPage;

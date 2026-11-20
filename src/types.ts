@@ -7,9 +7,10 @@ export type User = {
 };
 export type Message = {
   id: string;
-  userId: string;
-  from: "me" | "them";
+  sender_id: string;
+  receiver_id: string;
   text: string;
+  created_at: string;
 };
 export type Category = "frontend" | "backend" | "fullstack";
 export type CategoryFilter = Category | "all";

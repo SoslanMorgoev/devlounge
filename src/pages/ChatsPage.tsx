@@ -1,22 +1,37 @@
 import { Link } from "react-router";
-import { users } from "../data/users";
-import { useChatStore } from "../store/chatStore";
+import { useAuthStore } from "../store/authStore";
+import { useProfiles } from "../hooks/useProfiles";
+import { useQuery } from "@tanstack/react-query";
+import type { Message } from "../types";
+import { supabase } from "../lib/supabase";
+
 
 export function ChatsPage() {
-    const messages = useChatStore((state) => state.messages);
+    const me = useAuthStore((state) => state.user);
+    const { data: profiles, isPending: profilesPending } = useProfiles();
+    const { data: messages, isPending: messagesPending } = useQuery<Message[]>({
+        queryKey: ["messages"],
+        queryFn: async () => {
+            const { data, error } = await supabase.from("messages").select("*").order("created_at");
+            if (error) throw error;
+            return data;
+        }
+    });
+    if (profilesPending || messagesPending) return <p>Loading...</p>
+    if (!profiles || !messages) return <p>Something went wrong</p>
 
-    const chatIds = [...new Set(messages.map(m => m.userId))];
-
-    const chatUsers = users.filter(user => chatIds.includes(user.id));
-
-
+    function partnerOf(message: Message) {
+        return message.sender_id === me?.id ? message.receiver_id : message.sender_id;
+    }
+    const chatIds = [...new Set(messages.map(m => partnerOf(m)))];
+    const chatUsers = profiles.filter(user => chatIds.includes(user.id));
     return (
         <div className="chats">
             <h2>Chats</h2>
             {!chatUsers.length && <p>No chats yet</p>}
             <ul className="chatsList">
                 {chatUsers.map(user => {
-                    const lastMessage = messages.filter(m => m.userId === user.id).at(-1);
+                    const lastMessage = messages.filter(m => partnerOf(m) === user.id).at(-1);
                     return (
                         <li key={user.id}>
                             <Link to={`/chat/${user.id}`}>
