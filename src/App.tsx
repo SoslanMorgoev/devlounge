@@ -11,6 +11,7 @@ import { LogInPage } from "./pages/LoginPage";
 import { useEffect } from "react";
 import { supabase } from "./lib/supabase";
 import { useAuthStore } from "./store/authStore";
+import { RequireAuth } from "./components/RequireAuth";
 
 
 
@@ -28,13 +29,13 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<MembersPage />} />
-          <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/" element={<RequireAuth><MembersPage /></RequireAuth>} />
+          <Route path="/profile/:id" element={<RequireAuth><ProfilePage /></RequireAuth>} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/chat/:id" element={<ChatPage />} />
-          <Route path="/chats" element={<ChatsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/settings/account" element={<AccountPage />} />
+          <Route path="/chat/:id" element={<RequireAuth><ChatPage /></RequireAuth>} />
+          <Route path="/chats" element={<RequireAuth><ChatsPage /></RequireAuth>} />
+          <Route path="/settings" element={<RequireAuth><SettingsPage /></RequireAuth>} />
+          <Route path="/settings/account" element={<RequireAuth><AccountPage /></RequireAuth>} />
           <Route path="/login" element={<LogInPage />} />
 
         </Routes>

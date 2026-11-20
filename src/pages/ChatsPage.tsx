@@ -6,6 +6,7 @@ import type { Message } from "../types";
 import { supabase } from "../lib/supabase";
 
 
+
 export function ChatsPage() {
     const me = useAuthStore((state) => state.user);
     const { data: profiles, isPending: profilesPending } = useProfiles();
