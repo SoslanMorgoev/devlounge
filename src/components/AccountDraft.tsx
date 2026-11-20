@@ -26,7 +26,7 @@ export function AccountDraft({ profile, onClose }: { profile: User, onClose: () 
 
                 <div>
                     <button onClick={async () => {
-                        if (!inputName.trim() || !draftStatus || draftStatus.length > 60) return;
+                        if (!inputName.trim() || draftStatus.length > 60) return;
                         const { error } = await supabase
                             .from("profiles")
                             .update({ name: userName, category: draftCategory, status: draftStatus })

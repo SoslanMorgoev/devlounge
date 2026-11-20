@@ -12,8 +12,8 @@ function MemberProfile({ user, onClose }: { user: User, onClose: () => void }) {
                 <p>status: {user.status}</p>
                 <p>positions: {user.category}</p>
                 <div className="popUpButton">
-                    <button ><NavLink to={`/chat/${user.id}`}>Send message</NavLink></button>
-                    <button ><NavLink to={`/profile/${user.id}`}>Open profile</NavLink></button>
+                    <NavLink to={`/chat/${user.id}`}>Send message</NavLink>
+                    <NavLink to={`/profile/${user.id}`}>Open profile</NavLink>
                 </div>
 
 
