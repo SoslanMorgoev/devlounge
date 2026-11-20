@@ -1,32 +1,55 @@
-# React + TypeScript + Vite
+# DevLounge
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A small community app for developers: find people, chat in real time, and read dev news.
 
-Currently, two official plugins are available:
+**Live demo:** https://devlounge-mu.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![DevLounge](./screenshot.png)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Sign up and log in with email and password
+- Members list with search and a filter by position (frontend / backend / fullstack)
+- Member profiles
+- Private messages that appear in real time, without reloading the page
+- Chats list with the last message of each conversation
+- News feed from dev.to with search by tag
+- Edit your own name, position and status
+- Choose a default tag for the news feed
+- Pages are only available after logging in (except News and Login)
 
-## Expanding the Oxlint configuration
+## Tech stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+| Technology         | Why I used it                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| React + TypeScript | UI built from components; TypeScript catches mistakes before the app runs                                          |
+| React Router       | Every page has its own URL (`/chats`, `/profile/:id`, ...)                                                         |
+| Zustand            | Shared state for many components without passing props, e.g. the logged-in user. Settings are saved with `persist` |
+| React Query        | Loads data from Supabase and dev.to, caches it, and gives ready loading / error states                             |
+| Supabase           | Backend without writing my own server: database, authentication and realtime updates                               |
+| Vercel             | Hosting; every push to GitHub deploys a new version                                                                |
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## A decision I made myself
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+- **Debounce in the news search.** The search waits 500 ms after the last key press before sending a request. Without it, typing "react" would send five requests: `r`, `re`, `rea`, `reac`, `react`. I built it with `useEffect` and `setTimeout`, and `clearTimeout` in the cleanup.
+
+## What I learned
+
+- **Rules of Hooks.** React remembers hooks by their order. I got the error "change in the order of Hooks" twice because I returned early (`if (isPending) return ...`) before some hooks. Now my components follow one order: hooks → early returns → calculations → JSX.
+
+## Run locally
+
+1. Install dependencies:
+   ```
+   npm install
+   ```
+2. Create a Supabase project and run [`supabase/schema.sql`](./supabase/schema.sql) in its SQL Editor. It creates the tables and the access rules.
+3. Create a file `.env.local` in the project root with your Supabase keys:
+   ```
+   VITE_SUPABASE_URL=your-project-url
+   VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+   ```
+4. Start the dev server:
+   ```
+   npm run dev
+   ```
