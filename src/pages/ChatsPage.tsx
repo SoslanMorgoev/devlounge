@@ -4,7 +4,7 @@ import { useProfiles } from "../hooks/useProfiles";
 import { useQuery } from "@tanstack/react-query";
 import type { Message } from "../types";
 import { supabase } from "../lib/supabase";
-
+import { partnerOf } from "../utils/partnerOf";
 
 
 export function ChatsPage() {
@@ -20,11 +20,8 @@ export function ChatsPage() {
     });
     if (profilesPending || messagesPending) return <p>Loading...</p>
     if (!profiles || !messages) return <p>Something went wrong</p>
-
-    function partnerOf(message: Message) {
-        return message.sender_id === me?.id ? message.receiver_id : message.sender_id;
-    }
-    const chatIds = [...new Set(messages.map(m => partnerOf(m)))];
+    if (!me) return null;
+    const chatIds = [...new Set(messages.map(m => partnerOf(m, me.id)))];
     const chatUsers = profiles.filter(user => chatIds.includes(user.id));
     return (
         <div className="chats">
@@ -32,7 +29,7 @@ export function ChatsPage() {
             {!chatUsers.length && <p>No chats yet</p>}
             <ul className="chatsList">
                 {chatUsers.map(user => {
-                    const lastMessage = messages.filter(m => partnerOf(m) === user.id).at(-1);
+                    const lastMessage = messages.filter(m => partnerOf(m, me.id) === user.id).at(-1);
                     return (
                         <li key={user.id}>
                             <Link to={`/chat/${user.id}`}>
