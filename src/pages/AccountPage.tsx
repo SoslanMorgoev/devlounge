@@ -18,16 +18,16 @@ export function AccountPage() {
     return (
         <article className="profileForm">
             <div className="profileInformation">
-
+                <p className="avatar">{profile.name[0].toUpperCase()}</p>
                 <ul className="accountInfo">
-                    <p className="avatar">{profile.name[0].toUpperCase()}</p>
+
                     <li>Name: {profile.name}</li>
                     <li>Position: {profile.category}</li>
                     <li>Status: {profile.status}</li>
-                    <button onClick={editProfile}>Edit</button>
-                    {isEditing && <AccountDraft profile={profile} onClose={handleClose} />}
+
                 </ul>
-            </div>
+                <button onClick={editProfile}>Edit</button>
+                {isEditing && <AccountDraft profile={profile} onClose={handleClose} />}            </div>
         </article>
 
     )
