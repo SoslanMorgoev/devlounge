@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 export function AccountDraft({ profile, onClose }: { profile: User, onClose: () => void }) {
     const queryClient = useQueryClient();
 
-    const [inputName, setInputName] = useState(profile.name);
+    const [inputName, setInputName] = useState("");
     const [draftStatus, setDraftStatus] = useState(profile.status);
     const userName = inputName.trim();
     const [draftCategory, setDraftCategory] = useState<Category>(profile.category);
@@ -26,7 +26,7 @@ export function AccountDraft({ profile, onClose }: { profile: User, onClose: () 
 
                 <div>
                     <button onClick={async () => {
-
+                        if (!inputName.trim() || !draftStatus || draftStatus.length > 60) return;
                         const { error } = await supabase
                             .from("profiles")
                             .update({ name: userName, category: draftCategory, status: draftStatus })
