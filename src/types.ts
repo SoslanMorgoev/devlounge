@@ -12,6 +12,11 @@ export type Message = {
   text: string;
   created_at: string;
 };
+export type NewMessage = {
+  sender_id: string;
+  receiver_id: string;
+  text: string;
+};
 export type Category = "frontend" | "backend" | "fullstack";
 export type CategoryFilter = Category | "all";
 export type SelectedUser = User | null;
