@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import { useProfile } from "../hooks/useProfile";
 import { useAuthStore } from "../store/authStore";
-import { useQuery } from "@tanstack/react-query";
-import type { Message } from "../types";
-import { supabase } from "../lib/supabase";
 import { useSendMessage } from "../hooks/useSendMessage";
+import { useConversation } from "../hooks/useConversation";
 
 function ChatPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -13,18 +11,7 @@ function ChatPage() {
   const { id } = useParams();
   const sendMessage = useSendMessage();
   const me = useAuthStore((state) => state.user);
-  const { data: messages } = useQuery<Message[]>({
-    queryKey: ["messages", id],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("messages")
-        .select("*")
-        .or(`sender_id.eq.${id},receiver_id.eq.${id}`)
-        .order("created_at");
-      if (error) throw error;
-      return data;
-    },
-  });
+  const { data: messages } = useConversation(id);
   const userId = id ?? "";
   const [messageInput, setMessageInput] = useState("");
   const lastMessage = messages?.at(-1);
