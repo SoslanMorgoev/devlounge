@@ -4,6 +4,7 @@ import { useProfile } from "../hooks/useProfile";
 import { useAuthStore } from "../store/authStore";
 import { useSendMessage } from "../hooks/useSendMessage";
 import { useConversation } from "../hooks/useConversation";
+import { useDeleteMessage } from "../hooks/useDeleteMessage";
 
 function ChatPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -16,6 +17,8 @@ function ChatPage() {
   const [messageInput, setMessageInput] = useState("");
   const lastMessage = messages?.at(-1);
   const { data: user, isPending, isError } = useProfile(id);
+  const deleteMessage = useDeleteMessage();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -42,7 +45,22 @@ function ChatPage() {
               className={message.sender_id === me?.id ? "msgme" : "msgthem"}
               key={message.id}
             >
-              {message.text}
+              <button
+                className="textButton"
+                onClick={() =>
+                  setSelectedId(selectedId === message.id ? null : message.id)
+                }
+              >
+                {message.text}
+              </button>
+              {selectedId === message.id && (
+                <div className="deleteMessage">
+                  <button onClick={() => deleteMessage.mutate(message.id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => setSelectedId(null)}>Cancel</button>
+                </div>
+              )}
             </li>
           ))}
           <div ref={bottomRef}></div>

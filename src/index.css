@@ -7,7 +7,7 @@
   --me: #8b7cff40;
   --them: #ffffff14;
   --chatsList: #b3a9ff;
-  --issue: #ff5c72;
+  --issue: #ff5c72c3;
   --newsBg: #1d212c;
   --overlay: #0d0f14cc;
 }
@@ -436,6 +436,25 @@ main {
 .userProfileButtons {
   display: flex;
   flex-direction: column;
+}
+.deleteMessage {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.deleteMessage button {
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transition: transform 0.2sec ease;
+}
+.deleteMessage button:hover {
+  transform: scale(1.1);
+  background-color: var(--issue);
+}
+.textButton {
+  background: none;
+  border: none;
+  color: var(--text);
 }
 @media (max-width: 600px) {
   .title {

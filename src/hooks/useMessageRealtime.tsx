@@ -10,7 +10,7 @@ export function useMessageRealtime() {
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
           table: "messages",
         },
