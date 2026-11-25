@@ -45,17 +45,26 @@ function ChatPage() {
               className={message.sender_id === me?.id ? "msgme" : "msgthem"}
               key={message.id}
             >
-              <button
-                className="textButton"
-                onClick={() =>
-                  setSelectedId(selectedId === message.id ? null : message.id)
-                }
-              >
-                {message.text}
-              </button>
+              {message.sender_id === me?.id ? (
+                <button
+                  className="textButton"
+                  onClick={() =>
+                    setSelectedId(selectedId === message.id ? null : message.id)
+                  }
+                >
+                  {message.text}
+                </button>
+              ) : (
+                <button className="textButton">{message.text}</button>
+              )}
               {selectedId === message.id && (
                 <div className="deleteMessage">
-                  <button onClick={() => deleteMessage.mutate(message.id)}>
+                  <button
+                    onClick={() => {
+                      deleteMessage.mutate(message.id);
+                      new Audio("/deleteSms.mp3").play();
+                    }}
+                  >
                     Delete
                   </button>
                   <button onClick={() => setSelectedId(null)}>Cancel</button>
