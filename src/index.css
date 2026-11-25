@@ -465,6 +465,15 @@ main {
   display: flex;
   gap: 4px;
 }
+.badge {
+  background-color: var(--issue);
+  color: white;
+  border-radius: 999px;
+  padding: 0 6px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  margin-left: 4px;
+}
 
 @media (max-width: 600px) {
   .title {

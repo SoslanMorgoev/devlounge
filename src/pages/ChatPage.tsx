@@ -6,10 +6,12 @@ import { useSendMessage } from "../hooks/useSendMessage";
 import { useConversation } from "../hooks/useConversation";
 import { useDeleteMessage } from "../hooks/useDeleteMessage";
 import { formatTime } from "../utils/formatTime";
+import { useResetUnread } from "../hooks/useResetUnread";
 
 function ChatPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  useResetUnread();
   const { id } = useParams();
   const sendMessage = useSendMessage();
   const me = useAuthStore((state) => state.user);

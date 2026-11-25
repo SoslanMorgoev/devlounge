@@ -2,10 +2,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { useAuthStore } from "../store/authStore";
+import { useNotificationStore } from "../store/notificationStore";
 
 export function useMessageRealtime() {
   const queryClient = useQueryClient();
   const me = useAuthStore((state) => state.user);
+  const increment = useNotificationStore((state) => state.increment);
   useEffect(() => {
     const channel = supabase
       .channel("message-changes")
@@ -22,6 +24,7 @@ export function useMessageRealtime() {
             payload.new.sender_id !== me?.id
           ) {
             new Audio("/notice.mp3").play();
+            increment();
           }
           queryClient.invalidateQueries({ queryKey: ["messages"] });
         },
