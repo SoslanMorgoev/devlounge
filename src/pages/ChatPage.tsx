@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/authStore";
 import { useSendMessage } from "../hooks/useSendMessage";
 import { useConversation } from "../hooks/useConversation";
 import { useDeleteMessage } from "../hooks/useDeleteMessage";
+import { formatTime } from "../utils/formatTime";
 
 function ChatPage() {
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -46,16 +47,28 @@ function ChatPage() {
               key={message.id}
             >
               {message.sender_id === me?.id ? (
-                <button
-                  className="textButton"
-                  onClick={() =>
-                    setSelectedId(selectedId === message.id ? null : message.id)
-                  }
-                >
-                  {message.text}
-                </button>
+                <div className="messageText">
+                  <button
+                    className="textButton"
+                    onClick={() =>
+                      setSelectedId(
+                        selectedId === message.id ? null : message.id,
+                      )
+                    }
+                  >
+                    {message.text}
+                  </button>
+                  <span className="messageTime">
+                    {formatTime(message.created_at)}
+                  </span>
+                </div>
               ) : (
-                <button className="textButton">{message.text}</button>
+                <div className="messageText">
+                  <button className="textButton">{message.text}</button>
+                  <span className="messageTime">
+                    {formatTime(message.created_at)}
+                  </span>
+                </div>
               )}
               {selectedId === message.id && (
                 <div className="deleteMessage">
